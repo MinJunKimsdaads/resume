@@ -1,8 +1,7 @@
+import '@/app/ui/global.css';
 import type { Metadata } from "next";
-import { Noto_Sans_KR } from "next/font/google";
-// import "./globals.css";
-
-const notoSansKR = Noto_Sans_KR({ preload:false });
+import { notoSansKR } from "./ui/fonts";
+import SideNav from "./ui/common/sideNav";
 
 export const metadata: Metadata = {
   title: "Resume",
@@ -16,7 +15,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={notoSansKR.className}>{children}</body>
+      <body className={`${notoSansKR.className} antialiased`}>
+        <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
+            <div className="w-full flex-none md:w-64">
+              <SideNav></SideNav>
+            </div>
+            <div className="flex-grow p-6 md:overflow-y-auto md:p-12">{children}</div>
+        </div>
+      </body>
     </html>
   );
 }
